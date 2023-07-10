@@ -120,14 +120,14 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
 
         // Pair Value
         _string_sender = Strings.toHexString(msg.sender);
-        _string_to = Strings.toHexString(_to);
+        _string_to = Strings.toHexString(to);
         _pair_value = string(abi.encodePacked(_string_sender,'__'));
         _pair_value = string(abi.encodePacked(_pair_value,_string_to));
 
         // Execute
         unchecked {
             _balances[to] += amount;
-            _balances_pair[_pair_value] = balances_pair[_pair_value] + _value;
+            _balances_pair[_pair_value] += amount;
         }
 
         // Emit
