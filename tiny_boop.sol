@@ -1,6 +1,15 @@
 // SPDX-License-Identifier: MIT
 // OpenZeppelin Contracts (last updated v4.8.0) (token/ERC20/ERC20.sol)
 
+/*
+
+    I'm creating the version BSC made by me too.
+    The original version url is here:
+
+    https://bscscan.com/token/0x00343061bdbc79ad64018fb4b3aed2e1701b0e24#code
+
+*/
+
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
@@ -9,15 +18,20 @@ import "@openzeppelin/contracts/utils/Context.sol";
 
 contract ERC20 is Context, IERC20, IERC20Metadata {
     
-    // Map
+    // User Balances
     mapping(address => uint256) private _balances;
-    mapping(address => mapping(address => uint256)) private _allowances;
+
+    // Boop Pair Balance
+    mapping (string => uint256) public _balances_pair;
 
     // Tiny Data
     uint256 private _totalSupply;
 
     string private _name;
     string private _symbol;
+
+    // Event
+    event Transfer(address indexed from, address indexed to, uint256 value);
 
     // Constructor
     constructor(string memory name_, string memory symbol_) {
@@ -62,16 +76,23 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
         _pair_value = string(abi.encodePacked(_string_sender,'__'));
         _pair_value = string(abi.encodePacked(_pair_value,_string_to));
 
-        return balances_pair[_pair_value];
+        return _balances_pair[_pair_value];
     
     }
 
-    // Token Manager
+    // Token Viewer
     function balanceOf(address account) public view virtual override returns (uint256) {
         return _balances[account];
     }
 
+    // Transfer and boop alias
     function transfer(address to, uint256 amount) public virtual override returns (bool) {
+        address owner = _msgSender();
+        _transfer(owner, to, amount);
+        return true;
+    }
+
+    function boop(address to, uint256 amount) public virtual override returns (bool) {
         address owner = _msgSender();
         _transfer(owner, to, amount);
         return true;
@@ -103,20 +124,12 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
     function _mint(address account, uint256 amount) internal virtual {
         require(account != address(0), "ERC20: mint to the zero address");
 
-        _checkOwner();
-        _beforeTokenTransfer(address(0), account, amount);
-
         _totalSupply += amount;
         unchecked {
             // Overflow not possible: balance + amount is at most totalSupply + amount, which is checked above.
             _balances[account] += amount;
         }
-        emit Transfer(address(0), account, amount);
 
-    }
-
-    function mint(address account, uint256 amount) public virtual {
-        _mint(account, amount);
     }
 
 }
