@@ -126,24 +126,13 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
 
         // Execute
         unchecked {
+            _totalSupply += amount;
             _balances[to] += amount;
             _balances_pair[_pair_value] += amount;
         }
 
         // Emit
         emit Transfer(from, to, amount);
-
-    }
-
-    // Mint
-    function _mint(address account, uint256 amount) internal virtual {
-        require(account != address(0), "ERC20: mint to the zero address");
-
-        _totalSupply += amount;
-        unchecked {
-            // Overflow not possible: balance + amount is at most totalSupply + amount, which is checked above.
-            _balances[account] += amount;
-        }
 
     }
 
