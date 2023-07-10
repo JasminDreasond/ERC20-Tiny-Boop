@@ -103,21 +103,25 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
         address to,
         uint256 amount
     ) internal virtual {
+
+        // Validator
         require(from != address(0), "ERC20: transfer from the zero address");
         require(to != address(0), "ERC20: transfer to the zero address");
 
-        uint256 fromBalance = _balances[from];
-        require(fromBalance >= amount, "ERC20: transfer amount exceeds balance");
+        // You can only send 3 boops.
+        require(_to != address(0), "Boop Receiver address invalid");
+        require(_to != address(msg.sender), "Hey! You can't try to boop yourself! >:c");
+        require(_value >= 1000, "Calm your crazy paw! Boop Value must be between 1 to 3");
+        require(_value <= 3000, "Calm your crazy paw! Boop Value must be between 1 to 3");
+
+        // Execute
         unchecked {
-            _balances[from] = fromBalance - amount;
-            // Overflow not possible: the sum of all balances is capped by totalSupply, and the sum is preserved by
-            // decrementing then incrementing.
             _balances[to] += amount;
         }
 
+        // Emit
         emit Transfer(from, to, amount);
 
-        _afterTokenTransfer(from, to, amount);
     }
 
     // Mint
