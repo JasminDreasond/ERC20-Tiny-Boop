@@ -1,0 +1,45 @@
+{
+	"compiler": {
+		"version": "0.8.18+commit.87f61d96"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"details": "String operations.",
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"tiny_boop_flattened.sol": "Strings"
+		},
+		"evmVersion": "paris",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"tiny_boop_flattened.sol": {
+			"keccak256": "0x7ed0e81e6167b2a591c857fdace10a2f452857795031ea8bfbad0b5d385eab12",
+			"urls": [
+				"bzz-raw://296f4e5edb57196f1ceb88d53ed4839d142fd49fe53b95c2590321d606b76f67",
+				"dweb:/ipfs/QmNotCHhstZip1JkVTcFgMpikG1of5kFAVKiXd1dQr8iAG"
+			]
+		}
+	},
+	"version": 1
+}
