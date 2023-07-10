@@ -15,11 +15,11 @@
 
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
 import "@openzeppelin/contracts/utils/Context.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 
-contract ERC20 is Context, IERC20, IERC20Metadata {
+contract ERC20 is Context {
     
     // User Balances
     mapping(address => uint256) private _balances;
@@ -37,26 +37,26 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
     event Transfer(address indexed from, address indexed to, uint256 value);
 
     // Constructor
-    constructor(string memory name_, string memory symbol_) {
-        _name = name_;
-        _symbol = symbol_;
+    constructor() {
+        _name = 'Tiny Boop';
+        _symbol = 'Boop';
     }
 
     // Information
-    function name() public view virtual override returns (string memory) {
+    function name() public view virtual returns (string memory) {
         return _name;
     }
 
 
-    function symbol() public view virtual override returns (string memory) {
+    function symbol() public view virtual returns (string memory) {
         return _symbol;
     }
 
-    function decimals() public view virtual override returns (uint8) {
+    function decimals() public view virtual returns (uint8) {
         return 1;
     }
 
-    function totalSupply() public view virtual override returns (uint256) {
+    function totalSupply() public view virtual returns (uint256) {
         return _totalSupply;
     }
 
@@ -84,18 +84,12 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
     }
 
     // Token Viewer
-    function balanceOf(address account) public view virtual override returns (uint256) {
+    function balanceOf(address account) public view virtual returns (uint256) {
         return _balances[account];
     }
 
     // Transfer and boop alias
-    function transfer(address to, uint256 amount) public virtual override returns (bool) {
-        address owner = _msgSender();
-        _transfer(owner, to, amount);
-        return true;
-    }
-
-    function boop(address to, uint256 amount) public virtual override returns (bool) {
+    function transfer(address to, uint256 amount) public virtual returns (bool) {
         address owner = _msgSender();
         _transfer(owner, to, amount);
         return true;
@@ -139,10 +133,4 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
 
     }
 
-}
-
-// Create Contract here!
-pragma solidity ^0.8.4;
-contract TinyBoop is ERC20 {
-    constructor() ERC20("Tiny Boop", "Boop") {}
 }
