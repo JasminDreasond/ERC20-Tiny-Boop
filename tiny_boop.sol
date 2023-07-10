@@ -24,7 +24,7 @@ contract ERC20 is Context {
     mapping(address => uint256) private _balances;
 
     // Boop Pair Balance
-    mapping (string => uint256) public _balances_pair;
+    mapping (string => uint256) private _balances_pair;
 
     // Tiny Data
     uint256 private _totalSupply;
