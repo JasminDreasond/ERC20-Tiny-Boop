@@ -109,10 +109,9 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
         require(to != address(0), "ERC20: transfer to the zero address");
 
         // You can only send 3 boops.
-        require(_to != address(0), "Boop Receiver address invalid");
-        require(_to != address(msg.sender), "Hey! You can't try to boop yourself! >:c");
-        require(_value >= 1000, "Calm your crazy paw! Boop Value must be between 1 to 3");
-        require(_value <= 3000, "Calm your crazy paw! Boop Value must be between 1 to 3");
+        require(to != address(msg.sender), "Hey! You can't try to boop yourself! >:c");
+        require(amount >= 1, "Calm your crazy paw! Boop Value must be between 1 to 3");
+        require(amount <= 3, "Calm your crazy paw! Boop Value must be between 1 to 3");
 
         // Execute
         unchecked {
