@@ -3,7 +3,10 @@
 
 /*
 
-    I'm creating the version BSC made by me too.
+    Boop Contract made by Yasmin Seidel (JasminDreasond)
+    WARNING! This contract is designed to be fun! Don't try to use boops as a financial system!!
+
+    This is a better version from the BSC version (made by me too).
     The original version url is here:
 
     https://bscscan.com/token/0x00343061bdbc79ad64018fb4b3aed2e1701b0e24#code
