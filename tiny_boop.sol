@@ -113,9 +113,21 @@ contract ERC20 is Context, IERC20, IERC20Metadata {
         require(amount >= 1, "Calm your crazy paw! Boop Value must be between 1 to 3");
         require(amount <= 3, "Calm your crazy paw! Boop Value must be between 1 to 3");
 
+        // Base Values
+        string memory _string_sender;
+        string memory _string_to;
+        string memory _pair_value;
+
+        // Pair Value
+        _string_sender = Strings.toHexString(msg.sender);
+        _string_to = Strings.toHexString(_to);
+        _pair_value = string(abi.encodePacked(_string_sender,'__'));
+        _pair_value = string(abi.encodePacked(_pair_value,_string_to));
+
         // Execute
         unchecked {
             _balances[to] += amount;
+            _balances_pair[_pair_value] = balances_pair[_pair_value] + _value;
         }
 
         // Emit
